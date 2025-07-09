@@ -1,0 +1,16 @@
+xfce4
+xfce4-goodies
+thunar
+tumbler
+gvfs
+alacritty
+zsh
+lxappearance
+plank
+fastfetch
+micro
+xclip
+xfce4-power-manager
+xfce4-pulseaudio-plugin
+pavucontrol
+xfce4-screenshooter
