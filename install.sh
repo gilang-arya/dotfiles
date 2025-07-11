@@ -3,7 +3,7 @@
 set -euo pipefail
 
 REPO_URL="https://github.com/gilang-arya/dotfiles.git"
-CLONE_DIR="$HOME/.test"
+CLONE_DIR="$HOME/.dotfiles"
 
 echo -e "\n=== 🌟 Dotfiles Installer 🌟 ==="
 echo "📁 Repository : $REPO_URL"
