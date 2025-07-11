@@ -3,7 +3,7 @@
 set -euo pipefail
 
 REPO_URL="https://github.com/gilang-arya/dotfiles.git"
-CLONE_DIR="$HOME/.dotfiles"
+CLONE_DIR="$HOME/.test"
 
 echo -e "\n=== 🌟 Dotfiles Installer 🌟 ==="
 echo "📁 Repository : $REPO_URL"
@@ -29,9 +29,13 @@ cd "$CLONE_DIR"
 git sparse-checkout init --cone
 
 # ➤ Tampilkan pilihan
+clear
 echo -e "\n🗂️  Pilih dotfiles yang ingin di-install:"
-AVAILABLE=("sway" "neovim" "tmux")
-echo "Tersedia: ${AVAILABLE[*]}"
+AVAILABLE=("sway" "neovim" "tmux" "hyprland" "xfce")
+echo "Tersedia:"
+for item in "${AVAILABLE[@]}"; do
+    echo "- $item"
+done
 read -rp "Ketik pilihan dipisah spasi (misal: sway neovim): " -a SELECTED
 
 # 🔍 Validasi pilihan
@@ -50,6 +54,8 @@ if [[ ${#VALID_SELECTION[@]} -eq 0 ]]; then
 fi
 
 # ⏬ Checkout hanya folder yang dipilih
+echo ""
+echo "📁 Checkout folder yang dipilih"
 git sparse-checkout set "${VALID_SELECTION[@]}"
 git checkout main
 
@@ -72,9 +78,10 @@ for dir in "${VALID_SELECTION[@]}"; do
 done
 
 # 🔗 Menautkan dengan stow
+echo ""
 for dir in "${VALID_SELECTION[@]}"; do
   echo "🔗 Menautkan '$dir'..."
-  stow "$dir"
+  # stow "$dir"
 done
 
 echo -e "\n✅ Instalasi selesai!"
