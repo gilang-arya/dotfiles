@@ -119,17 +119,6 @@ link_dotfiles() {
   local dir="$1"
   echo "🔗 Menautkan '$dir'..."
 
-  cd "$CLONE_DIR"
-  for path in $(find "$dir" -mindepth 1 -maxdepth 1); do
-    target="$HOME/$(basename "$path")"
-    if [[ -e "$target" || -L "$target" ]]; then
-      timestamp=$(date +"%Y%m%d-%H%M%S")
-      backup="${target}.backup.${timestamp}"
-      echo "  ⚠️  $target sudah ada. Membuat backup ke $backup..."
-      mv "$target" "$backup"
-    fi
-  done
-
   stow "$dir" --dir="$CLONE_DIR" --target="$HOME"
 }
 
