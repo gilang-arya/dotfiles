@@ -1,0 +1,20 @@
+# Temporary files and folders (general)
+**/*.lock
+**/*.tmp
+**/*.log
+**/*.bak
+
+.vscode-oss/extensions/*
+!.vscode-oss/extensions/undefined_publisher.mytheme-0.0.1/
+
+# Kecualikan folder Code - OSS di bawah .config
+!.config/Code - OSS/
+.config/Code - OSS/*
+
+# Kecualikan folder User
+!.config/Code - OSS/User/
+.config/Code - OSS/User/*
+
+# Kecualikan dua file penting
+!.config/Code - OSS/User/keybindings.json
+!.config/Code - OSS/User/settings.json

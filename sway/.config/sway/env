@@ -1,0 +1,6 @@
+export GTK_THEME=Colloid-Teal-Dark
+export DOCKER_BUILDKIT=1
+export XDG_CURRENT_DESKTOP=sway
+export XDG_SESSION_TYPE=wayland
+export QT_QPA_PLATFORM=wayland
+export XDG_SESSION_DESKTOP=sway
