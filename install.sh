@@ -10,6 +10,18 @@ echo "📁 Repository : $REPO_URL"
 echo "📂 Folder     : $CLONE_DIR"
 echo ""
 
+# 🔄 Hapus direktori lama jika ada
+if [[ -d "$CLONE_DIR" ]]; then
+  echo "🧹 Menghapus direktori lama..."
+  rm -rf "$CLONE_DIR"
+fi
+
+# ✅ Pastikan 'stow' terpasang
+if ! command -v stow &> /dev/null; then
+  echo "🔧 stow belum ditemukan. Menginstal dengan pacman..."
+  sudo pacman -Sy --noconfirm stow
+fi
+
 # 🔍 Cek dependensi penting
 REQUIRED_CMDS=(git stow pacman find)
 for cmd in "${REQUIRED_CMDS[@]}"; do
@@ -18,18 +30,6 @@ for cmd in "${REQUIRED_CMDS[@]}"; do
     exit 1
   fi
 done
-
-# ✅ Pastikan 'stow' terpasang
-if ! command -v stow &> /dev/null; then
-  echo "🔧 stow belum ditemukan. Menginstal dengan pacman..."
-  sudo pacman -Sy --noconfirm stow
-fi
-
-# 🔄 Hapus direktori lama jika ada
-if [[ -d "$CLONE_DIR" ]]; then
-  echo "🧹 Menghapus direktori lama..."
-  rm -rf "$CLONE_DIR"
-fi
 
 # 🔽 Clone dengan sparse checkout
 echo "⬇️  Meng-clone repository secara parsial..."
