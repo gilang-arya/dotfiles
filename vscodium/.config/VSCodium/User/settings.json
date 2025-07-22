@@ -1,0 +1,57 @@
+{
+  "window.commandCenter": false,
+  "editor.fontFamily": "'0xProto Nerd Font', monospace",
+  "editor.fontSize": 14,
+  "editor.fontLigatures": true,
+  "editor.lineHeight": 2.2,
+  "editor.formatOnSave": true,
+  "editor.cursorBlinking": "expand",
+  "window.title": " ",
+  "editor.renderWhitespace": "all",
+  "editor.stickyScroll.enabled": false,
+  // MenuBar Toogle [alt]
+  "window.menuBarVisibility": "toggle",
+  "window.customTitleBarVisibility": "auto",
+  "editor.wordWrap": "on",
+  "zenMode.centerLayout": false,
+  "breadcrumbs.enabled": false,
+  "workbench.startupEditor": "none",
+  "editor.fontWeight": 600,
+  "editor.linkedEditing": true,
+  "editor.tabSize": 2,
+
+  // Language Formatter
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "security.workspace.trust.untrustedFiles": "open",
+  "editor.scrollbar.vertical": "hidden",
+  "editor.minimap.maxColumn": 90,
+  "editor.scrollbar.ignoreHorizontalScrollbarInContentHeight": true,
+  "editor.scrollbar.verticalScrollbarSize": 0,
+  "workbench.colorTheme": "Tokyo Night Dark",
+
+  // Vim
+  "vim.easymotion": true,
+  "vim.incsearch": true,
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "j"],
+      "after": ["<Esc>"]
+    }
+  ],
+  "vim.handleKeys": {
+    "<C-a>": false,
+    "<C-f>": false,
+    "<C-b>": false
+  },
+  // To improve performance
+  "extensions.experimental.affinity": {
+    "vscodevim.vim": 1
+  },
+  "editor.lineNumbers": "relative",
+  "terminal.integrated.fontSize": 13,
+  "workbench.productIconTheme": "material-product-icons",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.sideBar.location": "right"
+}

@@ -1,0 +1,6 @@
+export GTK_THEME=Gruvbox-Dark
+export DOCKER_BUILDKIT=1
+export XDG_CURRENT_DESKTOP=XFCE
+export XDG_SESSION_DESKTOP=xfce
+export XDG_SESSION_TYPE=x11
+
