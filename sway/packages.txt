@@ -24,3 +24,4 @@ starship
 zoxide
 polkit-gnome
 hyprpicker
+eza
