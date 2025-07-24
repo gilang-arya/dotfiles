@@ -66,6 +66,7 @@ for_window [app_id="mpv"] floating enable
 for_window [title="^Waydroid$"] fullscreen enable
 for_window [app_id="viewnior"] floating enable
 for_window [app_id="zenity"] floating enable
+for_window [title="^Steam Settings$"] floating enable
 
 # Resize some floating windows
 for_window [app_id="mpv"] resize set 800 500
