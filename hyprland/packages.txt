@@ -22,3 +22,6 @@ gvfs
 thunar-archive-plugin
 file-roller
 tumbler
+ttf-0xproto-nerd
+fish
+eza
