@@ -4,35 +4,34 @@ set -euo pipefail
 
 REPO_URL="https://github.com/gilang-arya/dotfiles.git"
 CLONE_DIR="$HOME/.dotfiles"
+AVAILABLE=("sway" "neovim" "tmux" "hyprland" "xfce" "vscodium")
 
-echo -e "\n=== 🌟 Dotfiles Installer 🌟 ==="
+echo -e "\n=== 🌟 Dotfiles Installer ==="
 echo "📁 Repository : $REPO_URL"
 echo "📂 Folder     : $CLONE_DIR"
 echo ""
 
+# ✅ Pastikan pkg terpasang
+check_or_install() {
+  local cmd="$1"
+  local pkg="$2"
+  if ! command -v "$cmd" &> /dev/null; then
+    echo "🔧 $cmd not found. Installing with pacman..."
+    sudo pacman -Sy --noconfirm "$pkg"
+  fi
+}
+
+check_or_install git git
+check_or_install stow stow
+
 # 🔄 Hapus direktori lama jika ada
 if [[ -d "$CLONE_DIR" ]]; then
-  echo "🧹 Menghapus direktori lama..."
+  echo "🧹 Deleting old directories..."
   rm -rf "$CLONE_DIR"
 fi
 
-# ✅ Pastikan 'stow' terpasang
-if ! command -v stow &> /dev/null; then
-  echo "🔧 stow belum ditemukan. Menginstal dengan pacman..."
-  sudo pacman -Sy --noconfirm stow
-fi
-
-# 🔍 Cek dependensi penting
-REQUIRED_CMDS=(git stow pacman find)
-for cmd in "${REQUIRED_CMDS[@]}"; do
-  if ! command -v "$cmd" &>/dev/null; then
-    echo "❌ Perintah '$cmd' tidak ditemukan. Pastikan sudah terinstal."
-    exit 1
-  fi
-done
-
 # 🔽 Clone dengan sparse checkout
-echo "⬇️  Meng-clone repository secara parsial..."
+echo "⬇️ Partially clone the repository..."
 git clone --filter=blob:none --no-checkout "$REPO_URL" "$CLONE_DIR"
 cd "$CLONE_DIR"
 git sparse-checkout init --cone
@@ -40,19 +39,16 @@ git sparse-checkout init --cone
 # 🔀 Deteksi branch utama secara otomatis
 BRANCH=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
 
-# ➤ Tampilkan pilihan
-AVAILABLE=("sway" "neovim" "tmux" "hyprland" "xfce" "vscodium")
-
 if [[ -n "${AUTO_MODE:-}" ]]; then
   SELECTED=("${AVAILABLE[@]}")
 else
   clear
-  echo -e "\n🗂️  Pilih dotfiles yang ingin di-install:"
-  echo "Tersedia:"
+  echo -e "\n🗂️  Select the dotfiles you want to install:"
+  echo "Available:"
   for item in "${AVAILABLE[@]}"; do
       echo "- $item"
   done
-  read -rp "Ketik pilihan dipisah spasi (misal: sway neovim): " -a SELECTED
+  read -rp "Type the options separated by spaces (eg: sway neovim): " -a SELECTED
 fi
 
 # 🔍 Validasi pilihan
@@ -61,12 +57,12 @@ for dir in "${SELECTED[@]}"; do
   if printf '%s\n' "${AVAILABLE[@]}" | grep -qx "$dir"; then
     VALID_SELECTION+=("$dir")
   else
-    echo "⚠️  '$dir' tidak tersedia. Dilewati."
+    echo "⚠️  '$dir' not available. Skipped."
   fi
 done
 
 if [[ ${#VALID_SELECTION[@]} -eq 0 ]]; then
-  echo "❌ Tidak ada dotfiles valid yang dipilih. Keluar."
+  echo "❌ No valid dotfiles selected."
   exit 1
 fi
 
@@ -78,18 +74,18 @@ for dir in "${VALID_SELECTION[@]}"; do
   if grep -qx "$dir" .available_dirs; then
     VALID_CHECKOUT+=("$dir")
   else
-    echo "❌ Folder '$dir' tidak ditemukan di repository. Dilewati."
+    echo "❌ Folder '$dir' not found in repository. Skipped."
   fi
 done
 
 if [[ ${#VALID_CHECKOUT[@]} -eq 0 ]]; then
-  echo "❌ Tidak ada folder valid untuk checkout. Keluar."
+  echo "❌ There is no valid folder to checkout."
   exit 1
 fi
 
 # ⏬ Checkout hanya folder yang dipilih
 echo ""
-echo "📁 Checkout folder yang dipilih"
+echo "📁 Checkout the selected folder"
 git sparse-checkout set "${VALID_CHECKOUT[@]}"
 git checkout "$BRANCH"
 
@@ -99,18 +95,18 @@ install_packages() {
   local pkg_file="$CLONE_DIR/$dir/packages.txt"
 
   if [[ -f "$pkg_file" ]]; then
-    echo -e "\n📦 Menginstal paket untuk '$dir'..."
+    echo -e "\n📦 Installing packages for '$dir'..."
     while IFS= read -r pkg; do
       [[ -z "$pkg" || "$pkg" == \#* ]] && continue
       if ! pacman -Q "$pkg" &>/dev/null; then
-        echo "  ➜ Menginstal $pkg..."
+        echo "  ➜ Installing $pkg..."
         sudo pacman -S --noconfirm "$pkg"
       else
-        echo "  ✓ $pkg sudah terpasang"
+        echo "  ✓ $pkg already installed"
       fi
     done < "$pkg_file"
   else
-    echo "⚠️  Tidak ada 'packages.txt' untuk '$dir', dilewati."
+    echo "⚠️  No 'packages.txt' for '$dir', skipped."
   fi
 }
 
@@ -122,7 +118,7 @@ done
 # 🔗 Fungsi untuk menautkan dotfiles
 link_dotfiles() {
   local dir="$1"
-  echo "🔗 Menautkan '$dir'..."
+  echo "🔗 Linking '$dir'..."
 
   stow "$dir" --dir="$CLONE_DIR" --target="$HOME"
 }
@@ -135,4 +131,4 @@ done
 # 🧹 Git cleanup opsional
 git gc --prune=now
 
-echo -e "\n✅ Instalasi selesai!"
+echo -e "\n✅ Installation complete!"

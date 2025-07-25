@@ -10,18 +10,18 @@ echo -e "\n=== 🔄 Dotfiles Updater ==="
 echo "📂 Folder dotfiles: $CLONE_DIR"
 
 # 🔍 Validasi dependensi
-REQUIRED_CMDS=(git stow pacman find)
+REQUIRED_CMDS=(git stow)
 for cmd in "${REQUIRED_CMDS[@]}"; do
   if ! command -v "$cmd" &>/dev/null; then
-    echo "❌ Perintah '$cmd' tidak ditemukan. Pastikan sudah terinstal."
+    echo "❌ The command '$cmd' was not found. Make sure it is installed."
     exit 1
   fi
 done
 
 # ❗ Pastikan direktori sudah di-clone sebelumnya
 if [[ ! -d "$CLONE_DIR/.git" ]]; then
-  echo "❌ Direktori $CLONE_DIR tidak valid atau belum di-clone."
-  echo "💡 Jalankan skrip install terlebih dahulu."
+  echo "❌ The $CLONE_DIR directory is invalid or has not been cloned."
+  echo "💡 Run the install script first."
   exit 1
 fi
 
@@ -29,8 +29,8 @@ cd "$CLONE_DIR"
 BRANCH=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
 
 # ➤ Tampilkan daftar dan tandai yang sudah ada
-echo -e "\n🗂️  Pilih dotfiles tambahan yang ingin ditambahkan:"
-echo "(Modul yang sudah diinstal akan ditandai)"
+echo -e "\n🗂️  Select the additional dotfiles you want to add:"
+echo "(Modules that have been installed will be marked)"
 echo ""
 
 INSTALLED=()
@@ -39,7 +39,7 @@ NOT_INSTALLED=()
 for item in "${AVAILABLE[@]}"; do
   if [[ -d "$CLONE_DIR/$item" ]]; then
     INSTALLED+=("$item")
-    echo "  [✓] $item (sudah diinstall)"
+    echo "  [✓] $item (already installed)"
   else
     NOT_INSTALLED+=("$item")
     echo "  [ ] $item"
@@ -48,12 +48,12 @@ done
 
 # 🔽 Jika semua sudah diinstal
 if [[ ${#NOT_INSTALLED[@]} -eq 0 ]]; then
-  echo -e "\n✅ Semua dotfiles sudah terinstal. Tidak ada yang bisa ditambahkan."
+  echo -e "\n✅ All dotfiles are installed. There are no more to add."
   exit 0
 fi
 
 # 🔽 Masukkan pilihan hanya dari yang belum terinstal
-read -rp $'\nKetik pilihan tambahan (dipisah spasi): ' -a NEW_SELECTION
+read -rp $'\nType additional options (separated by spaces): ' -a NEW_SELECTION
 
 # 🔍 Validasi
 VALID_SELECTION=()
@@ -61,12 +61,12 @@ for dir in "${NEW_SELECTION[@]}"; do
   if printf '%s\n' "${NOT_INSTALLED[@]}" | grep -qx "$dir"; then
     VALID_SELECTION+=("$dir")
   else
-    echo "⚠️  '$dir' tidak valid atau sudah diinstal. Dilewati."
+    echo "⚠️  '$dir' invalid or already installed. Skipped."
   fi
 done
 
 if [[ ${#VALID_SELECTION[@]} -eq 0 ]]; then
-  echo "❌ Tidak ada pilihan baru yang valid. Keluar."
+  echo "❌ There are no valid new choices."
   exit 1
 fi
 
@@ -78,18 +78,18 @@ for dir in "${VALID_SELECTION[@]}"; do
   if grep -qx "$dir" .available_dirs; then
     VALID_CHECKOUT+=("$dir")
   else
-    echo "❌ Folder '$dir' tidak ditemukan di repository. Dilewati."
+    echo "❌ Folder '$dir' not found in repository. Skipped."
   fi
 done
 
 if [[ ${#VALID_CHECKOUT[@]} -eq 0 ]]; then
-  echo "❌ Tidak ada folder valid untuk ditambahkan. Keluar."
+  echo "❌ There are no valid folders to add."
   exit 1
 fi
 
 # Tambahkan ke sparse-checkout
 echo ""
-echo "📁 Menambahkan folder baru ke sparse checkout..."
+echo "📁 Adding a new folder to the sparse checkout..."
 git sparse-checkout add "${VALID_CHECKOUT[@]}"
 git checkout "$BRANCH"
 
@@ -99,25 +99,25 @@ install_packages() {
   local pkg_file="$CLONE_DIR/$dir/packages.txt"
 
   if [[ -f "$pkg_file" ]]; then
-    echo -e "\n📦 Menginstal paket untuk '$dir'..."
+    echo -e "\n📦 Installing packages for '$dir'..."
     while IFS= read -r pkg; do
       [[ -z "$pkg" || "$pkg" == \#* ]] && continue
       if ! pacman -Q "$pkg" &>/dev/null; then
-        echo "  ➜ Menginstal $pkg..."
+        echo "  ➜ Installing $pkg..."
         sudo pacman -S --noconfirm "$pkg"
       else
-        echo "  ✓ $pkg sudah terpasang"
+        echo "  ✓ $pkg already installed"
       fi
     done < "$pkg_file"
   else
-    echo "⚠️  Tidak ada 'packages.txt' untuk '$dir', dilewati."
+    echo "⚠️  No 'packages.txt' for '$dir', skipped."
   fi
 }
 
 # 🔗 Tautkan dotfiles baru
 link_dotfiles() {
   local dir="$1"
-  echo "🔗 Menautkan '$dir'..."
+  echo "🔗 Linking '$dir'..."
 
   stow "$dir" --dir="$CLONE_DIR" --target="$HOME"
 }
@@ -128,4 +128,4 @@ for dir in "${VALID_SELECTION[@]}"; do
   link_dotfiles "$dir"
 done
 
-echo -e "\n✅ Dotfiles berhasil diperbarui!"
+echo -e "\n✅ Dotfiles updated successfully!"
