@@ -18,7 +18,7 @@ window#waybar {
 window > box {
   background: @main-bg;
   border-radius: 0.67em;
-  margin: 0.3em 0.42em 0 0.42em;
+  margin: 0.3em 8em 0 8em;
   padding-left: 0.83em;
 }
 
@@ -36,9 +36,8 @@ tooltip {
   margin: 0.33em 0;
 }
 
-#taskbar,
-#tray {
-  margin-left: 1.5em;
+#taskbar {
+  margin-left: 0.5em;
 }
 
 #workspaces button,
@@ -66,7 +65,7 @@ tooltip {
 }
 
 /* === Modules === */
-#tray,
+tray,
 #clock,
 #custom-pomo,
 #battery,
@@ -98,7 +97,7 @@ tooltip {
 /* === Tray === */
 #tray {
   border-radius: 5px;
-  margin-right: 1.5em;
+  margin-right: 0.5em;
   padding: 0 0.42em;
 }
 
