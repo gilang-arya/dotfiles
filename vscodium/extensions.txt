@@ -1,0 +1,13 @@
+bmewburn.vscode-intelephense-client
+bradlc.vscode-tailwindcss
+dbaeumer.vscode-eslint
+dsznajder.es7-react-js-snippets
+esbenp.prettier-vscode
+formulahendry.auto-close-tag
+formulahendry.code-runner
+ms-azuretools.vscode-docker
+pkief.material-icon-theme
+pkief.material-product-icons
+rangav.vscode-thunder-client
+ritwickdey.liveserver
+wallabyjs.quokka-vscode

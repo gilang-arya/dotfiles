@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Load env
+[ -f "$HOME/.config/xfce4/env" ] && source "$HOME/.config/xfce4/env"
+
+# Jalankan gsettings setelah jeda
+(sleep 3 && bash "$HOME/.config/xfce4/gsetting.sh") &
+
