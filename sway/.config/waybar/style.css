@@ -17,8 +17,8 @@ window#waybar {
 window > box {
   background: @main-bg;
   border-radius: 0.5em;
-  margin: 0.3em 8em;
-  padding: 0.4em 0.6em;
+  margin: 0.4em 8em 0.1em 8em;
+  padding: 0.2em 0.6em 0.2em 0.6em;
 }
 
 /* === Tooltip === */
@@ -31,15 +31,18 @@ tooltip {
 /* === Workspaces & Taskbar === */
 #workspaces,
 #taskbar {
-  border-radius: 4px;
   margin: 0.2em 0;
+  border-radius: 4px;
+}
+
+#workspaces {
+	background: #2c2d35;
 }
 
 #taskbar {
   margin-left: 0.8em;
 }
 
-#workspaces button,
 #taskbar button {
   border-radius: 4px;
   padding: 0.2em 0.4em;
@@ -48,6 +51,8 @@ tooltip {
 
 #workspaces button {
   color: #9ece6a;
+  border-radius: 4px;
+  padding: 0.2em 0.2em 0.2em 0em;
 }
 
 #workspaces button.focused {

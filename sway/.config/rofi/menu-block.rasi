@@ -6,7 +6,7 @@ configuration {
 * {
     main-bg:         		    #15161E;
     main-br:            		#ffffff;
-    select-bg:          		#292E42;
+    select-bg:          		#1A1B26;
     select-fg:					#c53b53;
     text:						#CDD6F4;
     text-fg:					#101C44;

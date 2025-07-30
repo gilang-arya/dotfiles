@@ -1967,7 +1967,7 @@ menubar > menuitem > window.popup.background > menu menuitem,
 menu {
   margin: 6px;
   padding: 6px;
-  background-color: #1f2231;
+  background-color: #1A1B26;
   background-clip: border-box;
   border-radius: 12px;
   /* border: 1px solid $primary; */
@@ -2046,7 +2046,7 @@ menu > arrow {
   min-height: 16px;
   min-width: 16px;
   padding: 4px;
-  background-color: #1f2231;
+  background-color: #1A1B26;
   color: rgba(233, 233, 237, 0.7);
 }
 
@@ -2085,7 +2085,7 @@ menu separator {
 popover.background {
   transition: box-shadow 75ms cubic-bezier(0, 0, 0.2, 1);
   padding: 0;
-  background-color: #1f2231;
+  background-color: #1A1B26;
   border-radius: 12px;
 }
 
@@ -2126,7 +2126,7 @@ popover.background > scrolledwindow > viewport.frame > list > row {
 
 popover.background .view:not(:selected),
 popover.background toolbar {
-  background-color: #1f2231;
+  background-color: #1A1B26;
 }
 
 popover.background button,
@@ -6502,7 +6502,7 @@ window.background.chromium treeview.view button {
 }
 
 window.background.chromium menu {
-  background-color: #1f2231;
+  background-color: #1A1B26;
   border-color: #3b3d56;
 }
 

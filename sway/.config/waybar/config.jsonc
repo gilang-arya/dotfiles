@@ -11,15 +11,15 @@
 
   // Module Layouts
   "modules-left": [
+  	"custom/l_end",
+  	"idle_inhibitor",
+  	"clock",
+  	"custom/r_end",
     "tray",
-  	"sway/workspaces",
     "wlr/taskbar"
   ],
   "modules-center": [
-  	"custom/l_end",
-    "idle_inhibitor",
-    "clock",
-    "custom/r_end"
+  	"sway/workspaces"
   ],
   "modules-right": [
   	"custom/l_end",

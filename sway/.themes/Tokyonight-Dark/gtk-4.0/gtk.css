@@ -2888,7 +2888,7 @@ popover > arrow,
 popover > contents {
   transition: box-shadow 75ms cubic-bezier(0, 0, 0.2, 1);
   padding: 6px;
-  background-color: #1f2231;
+  background-color: #1A1B26;
   border-radius: 12px;
   color: #e9e9ed;
   border: none;
@@ -2930,7 +2930,7 @@ popover > contents > box > button {
 
 popover .view:not(:selected),
 popover toolbar {
-  background-color: #1f2231;
+  background-color: #1A1B26;
 }
 
 popover button,
@@ -3472,7 +3472,7 @@ scrollbar > range > trough > slider {
   background-clip: padding-box;
   box-shadow: none;
   outline: none;
-  background-color: #1f2231;
+  background-color: #1A1B26;
 }
 
 scrollbar > range > trough > slider:hover {
@@ -8130,7 +8130,7 @@ overlay-split-view > shadow.down {
 .sidebar-pane .sidebar > scrolledwindow > scrollbar > range > trough > slider,
 .sidebar-pane toolbarview > scrolledwindow > scrollbar > range > trough > slider,
 .sidebar-pane navigation-view-page stack > scrolledwindow > scrollbar > range > trough > slider, placessidebar > scrolledwindow > scrollbar > range > trough > slider, .nautilus-window placessidebar scrollbar > range > trough > slider, leaflet.unfolded > box > scrolledwindow > scrollbar > range > trough > slider, leaflet.unfolded .contacts-contact-list > scrolledwindow > scrollbar > range > trough > slider, .sidebar-pane toolbarview > stack > box > widget > widget > scrolledwindow > scrollbar > range > trough > slider {
-  background-color: #1f2231;
+  background-color: #1A1B26;
 }
 
 .sidebar-pane .sidebar > scrolledwindow > scrollbar > range > trough > slider:hover,
