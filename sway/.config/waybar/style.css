@@ -33,10 +33,7 @@ tooltip {
 #taskbar {
   margin: 0.2em 0;
   border-radius: 4px;
-}
-
-#workspaces {
-	background: #2c2d35;
+  background: #25262F;
 }
 
 #taskbar {
@@ -100,9 +97,10 @@ tray,
 
 /* === Tray === */
 #tray {
+  background: #25262F;
   border-radius: 4px;
   margin-right: 0.3em;
-  padding: 0 0.3em;
+  padding: 0 0.5em;
 }
 
 /* === Custom Separators === */
