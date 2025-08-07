@@ -15,7 +15,6 @@ set $right l
 set $term foot
 set $browser firefox
 set $filemanager thunar
-set $texteditor codium --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform=wayland
 
 #################
 ### AUTOSTART ###
@@ -103,11 +102,11 @@ bindsym $mod+Return exec $term
 bindsym $mod+q kill
 bindsym $mod+f exec $browser
 bindsym $mod+e exec $filemanager
-bindsym $mod+c exec $texteditor
 bindsym $mod+space exec rofi -show drun -theme ~/.config/rofi/app-menu.rasi
 bindsym $mod+x exec sh ~/.scripts/menus/powermenu.sh
 bindsym $mod+m exec sh ~/.scripts/menus/music.sh
 bindsym $mod+w exec sh ~/.scripts/menus/network-manager.sh
+bindsym $mod+r exec sh ~/.scripts/menus/recording-manager.sh
 bindsym $mod+z exec hyprpicker -a
 
 # Screenshot
